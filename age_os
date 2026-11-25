@@ -1,0 +1,19 @@
+#!/bin/bash
+
+install_date=$(stat -c %W /)
+
+if [ "$install_date" -le 0 ]; then
+    echo "Unknown"
+    exit 1
+fi
+
+now=$(date +%s)
+days=$(( (now - install_date) / 86400 ))
+
+if [ "$days" -eq 0 ]; then
+    echo "Today"
+elif [ "$days" -eq 1 ]; then
+    echo "1 day"
+else
+    echo "$days days"
+fi
